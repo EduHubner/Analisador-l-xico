@@ -28,9 +28,9 @@ afd = {
         "a": "ID",
         "b": "BOOLEAN(B)", # começando o tratamento de BOOLEAN
         "c": "CHAR(C)", # começando o tratamento de CHAR
-        "d": "ID",
+        "d": "ID",  
         "e": "ID",
-        "f": "FLOAT(F)", # começando o tratamento de FLOAT e FOR
+        "f": "F", # começando o tratamento de FLOAT, FOR e FUN(function)
         "g": "ID",
         "h": "ID",
         "i": "I", # começando o tratamento de IF, IN e INT
@@ -54,7 +54,8 @@ afd = {
         ".": "CONCATENAR",
         ",": "VIRGULA",
         ";": "PONTO-VIRGULA",
-        ":": "DOIS-PONTOS"
+        ":": "DOIS-PONTOS",
+        '"': "ASPAS"
     },
     # Tratamento de IF, IN e INT
     "I": { # tratamento de IF, IN e INT, informado apenas o primeiro caractere 'I'(Estado Final)
@@ -213,7 +214,7 @@ afd = {
     },
     
     # Tratamento de FLOAT e FOR
-    "FLOAT(F)": { # primeiro caractere 'F' - pode ser FLOAT ou FOR
+    "F": { # primeiro caractere 'F' - pode ser FLOAT ou FOR
         "0": "ID",
         "1": "ID",
         "2": "ID",
@@ -244,7 +245,7 @@ afd = {
         "r": "ID",
         "s": "ID",
         "t": "ID",
-        "u": "ID",
+        "u": "FUN (U)", #se o próximo caractere for 'n', continua para FUN (funciotion)
         "v": "ID",
         "w": "ID",
         "x": "ID",
@@ -1127,6 +1128,7 @@ afd = {
     "VIRGULA": {},
     "PONTO-VIRGULA": {},
     "DOIS-PONTOS": {},
+    "ASPAS": {},
     # Concatenar
     "CONCATENAR": {},
     # Espaços
@@ -1574,11 +1576,89 @@ afd = {
         "x": "ID",
         "y": "ID",
         "z": "ID"
+    },
+    "FUN(U)": { # começando o tratamento de FUN, informado 'U' (Estado Final)
+        "0": "ID",
+        "1": "ID",
+        "2": "ID",
+        "3": "ID",
+        "4": "ID",
+        "5": "ID",
+        "6": "ID",
+        "7": "ID",
+        "8": "ID",
+        "9": "ID",
+        "a": "ID",
+        "b": "ID",
+        "c": "ID",
+        "d": "ID",
+        "e": "ID",
+        "f": "ID",
+        "g": "ID",
+        "h": "ID",
+        "i": "ID",
+        "j": "ID",
+        "k": "ID",
+        "l": "ID",
+        "m": "ID",
+        "n": "ID",
+        "o": "ID",
+        "p": "ID",
+        "q": "ID",
+        "r": "ID",
+        "s": "ID",
+        "t": "ID",
+        "u": "FUN", # se o próximo caractere for 'n', vai para o próximo estado
+        "v": "ID",
+        "w": "ID",
+        "x": "ID",
+        "y": "ID",
+        "z": "ID"
+    },
+    "FUN": { # estado final de FUN
+        "0": "ID",
+        "1": "ID",
+        "2": "ID",
+        "3": "ID",
+        "4": "ID",
+        "5": "ID",
+        "6": "ID",
+        "7": "ID",
+        "8": "ID",
+        "9": "ID",
+        "a": "ID",
+        "b": "ID",
+        "c": "ID",
+        "d": "ID",
+        "e": "ID",
+        "f": "ID",
+        "g": "ID",
+        "h": "ID",
+        "i": "ID",
+        "j": "ID",
+        "k": "ID",
+        "l": "ID",
+        "m": "ID",
+        "n": "ID",
+        "o": "ID",
+        "p": "ID",
+        "q": "ID",
+        "r": "ID",
+        "s": "ID",
+        "t": "ID",
+        "u": "ID",
+        "v": "ID",
+        "w": "ID",
+        "x": "ID",
+        "y": "ID",
+        "z": "ID"
     }
 }
 
 # Dicionário de estados finais
+
 finais = {
+    # Palavras reservadas
     "INT": "INT",
     "FLOAT": "FLOAT", 
     "STRING": "STRING",
@@ -1589,31 +1669,37 @@ finais = {
     "WHILE": "WHILE",
     "IN": "IN",
     "OUT": "OUT",
+    # Literais e identificadores
     "CONSTANTE": "CONSTANTE",
     "ID": "ID",
+    # Símbolos
     "ESPACO": "ESPACO",
     "ABRE_PARENTESES": "ABRE_PARENTESES",
     "FECHA_PARENTESES": "FECHA_PARENTESES",
+    "ABRE_CHAVE": "ABRE_CHAVE",
+    "FECHA_CHAVE": "FECHA_CHAVE",
+    "VIRGULA": "VIRGULA",
+    "PONTO-VIRGULA": "FIM-INSTRUCAO",
+    "DOIS-PONTOS": "DOIS-PONTOS",
+    "CONCATENAR": "CONCATENAR",
+    # Operadores
     "MAIOR": "MAIOR",
     "MENOR": "MENOR",
     "DIFERENTE": "DIFERENTE",
     "MAIOR_IGUAL": "MAIOR_IGUAL",
     "MENOR_IGUAL": "MENOR_IGUAL",
     "IGUAL_IGUAL": "IGUAL_IGUAL",
-    "ABRE_CHAVE": "ABRE_CHAVE",
-    "FECHA_CHAVE": "FECHA_CHAVE",
     "IGUAL": "IGUAL",
     "SOMA": "SOMA",
     "SUBTRACAO": "SUBTRACAO",
     "MULTIPLICACAO": "MULTIPLICACAO",
     "DIVISAO": "DIVISAO",
-    "CONCATENAR": "CONCATENAR",
-    "VIRGULA": "VIRGULA",
-    "PONTO-VIRGULA": "FIM-INSTRUCAO",
-    "DOIS-PONTOS": "DOIS-PONTOS",
+    # Função
+    "FUN": "FUN",
     # Estados intermediários que também são finais
+    # Estados de prefixo de palavras reservadas
     "I": "ID",
-    "FLOAT(F)": "ID",
+    "F": "ID",
     "BOOLEAN(B)": "ID", 
     "CHAR(C)": "ID",
     "STRING(S)": "ID",
@@ -1621,7 +1707,7 @@ finais = {
     "WHILE(W)": "ID",
     "INT_IN(N)": "IN",  # Se parar em 'in', é a palavra IN
     "STRING(T)": "ID",
-    "STRING(R)": "ID", 
+    "STRING(R)": "ID",
     "STRING(I)": "ID",
     "STRING(N)": "ID",
     "BOOLEAN(O)": "ID",
@@ -1637,7 +1723,8 @@ finais = {
     "WHILE(H)": "ID",
     "WHILE(I)": "ID",
     "WHILE(L)": "ID",
-    "OUT(U)": "ID"
+    "OUT(U)": "ID",
+    "FUN(U)": "ID"
 }
 
 lista_tokens = []
