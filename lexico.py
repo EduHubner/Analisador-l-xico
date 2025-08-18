@@ -1645,6 +1645,8 @@ estado = "INICIAL"
 i = 0
 pos = 0
 lexema = ""
+# Lista para acumular erros
+erros = []
 
 # Exemplo de entrada com declaração de variáveis
 entrada = "int num = 10; float valor = 3.14; string nome; boolean ativo = true; char letra = a; for (i=1;i<10;i++) { out(i); } "
@@ -1662,8 +1664,12 @@ while i < len(entrada):
         estado = "INICIAL"
         lexema = ""
     else:
-        print(f"Erro: token inválido: '{lexema}{entrada[i]}' na posição {pos}")
-        break
+        erros.append(f"Erro: token inválido: '{lexema}{entrada[i]}' na posição {pos}")
+        # Reinicia o estado e lexema para continuar analisando
+        estado = "INICIAL"
+        lexema = ""
+        i += 1
+        pos += 1
 
 # Verifica se ainda há um token para processar no final
 if lexema and estado in finais:
@@ -1674,3 +1680,9 @@ print("TOKENS RECONHECIDOS:")
 print("=" * 50)
 for tk in lista_tokens:
     print(tk)
+
+if erros:
+    print("\nERROS ENCONTRADOS:")
+    print("=" * 50)
+    for erro in erros:
+        print(erro)
