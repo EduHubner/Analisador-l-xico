@@ -31,7 +31,7 @@ class Lexico:
                 "b": "BOOLEAN(B)", # começando o tratamento de BOOLEAN
                 "c": "CHAR(C)", # começando o tratamento de CHAR
                 "d": "ID",  
-                "e": "ID",
+                "e": "ELSE(E)", # começando o tratamento de ELSE
                 "f": "F", # começando o tratamento de FLOAT, FOR e FUN(function)
                 "g": "ID",
                 "h": "ID",
@@ -136,7 +136,164 @@ class Lexico:
                 "y": "ID",
                 "z": "ID"
             },
-            
+
+            # Tratamento de ELSE
+            "ELSE(E)": {
+                "0": "ID",
+                "1": "ID",
+                "2": "ID",
+                "3": "ID",
+                "4": "ID",
+                "5": "ID",
+                "6": "ID",
+                "7": "ID",
+                "8": "ID",
+                "9": "ID",
+                "a": "ID",
+                "b": "ID",
+                "c": "ID",
+                "d": "ID",
+                "e": "ID",
+                "f": "ID",
+                "g": "ID",
+                "h": "ID",
+                "i": "ID",
+                "j": "ID",
+                "k": "ID",
+                "l": "ELSE(L)", # se o próximo caractere for 'l', continua
+                "m": "ID",
+                "n": "ID",
+                "o": "ID",
+                "p": "ID",
+                "q": "ID",
+                "r": "ID",
+                "s": "ID",
+                "t": "ID",
+                "u": "ID",
+                "v": "ID",
+                "w": "ID",
+                "x": "ID",
+                "y": "ID",
+                "z": "ID"
+            },
+
+            "ELSE(L)": {
+                "0": "ID",
+                "1": "ID",
+                "2": "ID",
+                "3": "ID",
+                "4": "ID",
+                "5": "ID",
+                "6": "ID",
+                "7": "ID",
+                "8": "ID",
+                "9": "ID",
+                "a": "ID",
+                "b": "ID",
+                "c": "ID",
+                "d": "ID",
+                "e": "ID",
+                "f": "ID",
+                "g": "ID",
+                "h": "ID",
+                "i": "ID",
+                "j": "ID",
+                "k": "ID",
+                "l": "ID",
+                "m": "ID",
+                "n": "ID",
+                "o": "ID",
+                "p": "ID",
+                "q": "ID",
+                "r": "ID",
+                "s": "ELSE(S)", # se o próximo caractere for 's', continua
+                "t": "ID",
+                "u": "ID",
+                "v": "ID",
+                "w": "ID",
+                "x": "ID",
+                "y": "ID",
+                "z": "ID"
+            },
+
+            "ELSE(S)": {
+                "0": "ID",
+                "1": "ID",
+                "2": "ID",
+                "3": "ID",
+                "4": "ID",
+                "5": "ID",
+                "6": "ID",
+                "7": "ID",
+                "8": "ID",
+                "9": "ID",
+                "a": "ID",
+                "b": "ID",
+                "c": "ID",
+                "d": "ID",
+                "e": "ELSE", # se o próximo caractere for 'e', vai para o estado final de ELSE
+                "f": "ID",
+                "g": "ID",
+                "h": "ID",
+                "i": "ID",
+                "j": "ID",
+                "k": "ID",
+                "l": "ID",
+                "m": "ID",
+                "n": "ID",
+                "o": "ID",
+                "p": "ID",
+                "q": "ID",
+                "r": "ID",
+                "s": "ID",
+                "t": "ID",
+                "u": "ID",
+                "v": "ID",
+                "w": "ID",
+                "x": "ID",
+                "y": "ID",
+                "z": "ID"
+            },
+
+            "ELSE": { # estado final de ELSE (Estado Final)
+                "0": "ID",
+                "1": "ID",
+                "2": "ID",
+                "3": "ID",
+                "4": "ID",
+                "5": "ID",
+                "6": "ID",
+                "7": "ID",
+                "8": "ID",
+                "9": "ID",
+                "a": "ID",
+                "b": "ID",
+                "c": "ID",
+                "d": "ID",
+                "e": "ID",
+                "f": "ID",
+                "g": "ID",
+                "h": "ID",
+                "i": "ID",
+                "j": "ID",
+                "k": "ID",
+                "l": "ID",
+                "m": "ID",
+                "n": "ID",
+                "o": "ID",
+                "p": "ID",
+                "q": "ID",
+                "r": "ID",
+                "s": "ID",
+                "t": "ID",
+                "u": "ID",
+                "v": "ID",
+                "w": "ID",
+                "x": "ID",
+                "y": "ID",
+                "z": "ID"
+            },
+
             # Tratamento de INT e IN
             "INT_IN(N)": { # segundo caractere 'N' - pode ser INT ou IN
                 "0": "ID",
@@ -247,7 +404,7 @@ class Lexico:
                 "r": "ID",
                 "s": "ID",
                 "t": "ID",
-                "u": "FUN (U)", #se o próximo caractere for 'n', continua para FUN (funciotion)
+                "u": "FUN(U)", #se o próximo caractere for 'n', continua para FUN (funciotion)
                 "v": "ID",
                 "w": "ID",
                 "x": "ID",
@@ -1087,45 +1244,10 @@ class Lexico:
                 "z": "ID",
                 ".": "PONTO_ACESSO"
             },
-            # Tratamento de PONTO_ACESSO (Usar metodos de uma classe, ex: pessoa.getNome())
-            "PONTO_ACESSO": {
-                "0": "ID",
-                "1": "ID",
-                "2": "ID",
-                "3": "ID",
-                "4": "ID",
-                "5": "ID",
-                "6": "ID",
-                "7": "ID",
-                "8": "ID",
-                "9": "ID",
-                "a": "ID",
-                "b": "ID",
-                "c": "ID",
-                "d": "ID",
-                "e": "ID",
-                "f": "ID",
-                "g": "ID",
-                "h": "ID",
-                "i": "ID",
-                "j": "ID",
-                "k": "ID",
-                "l": "ID",
-                "m": "ID",
-                "n": "ID",
-                "o": "ID",
-                "p": "ID",
-                "q": "ID",
-                "r": "ID",
-                "s": "ID",
-                "t": "ID",
-                "u": "ID",
-                "v": "ID",
-                "w": "ID",
-                "x": "ID",
-                "y": "ID",
-                "z": "ID"
-            },
+            # Tratamento de PONTO_ACESSO (Usar metodos de uma classe, ex: pessoa.getNome()) Estado final
+            # Nesse caso o ponto acesso irá guardar um token que será um ID com um . no final (Ex: pessoa.), faço isso para não dar conflico 
+            # com o . do CONCATENAR
+            "PONTO_ACESSO": {},
             # Pontuações
             "VIRGULA": {},
             "PONTO_VIRGULA": {},
@@ -1139,8 +1261,14 @@ class Lexico:
             "ABRE_PARENTESES": {},
             "FECHA_PARENTESES": {},
             # Operadores
-            "SOMA": {},
-            "SUBTRACAO": {},
+            "SOMA": { # Estado final SOMA
+                "+": "INCREMENTO"
+            },
+            "INCREMENTO": {}, # Estado final de incremento (++)
+            "SUBTRACAO": {
+                "-": "DECREMENTO"
+            },
+            "DECREMENTO": {},  # Estado final de decremento (--)
             "MULTIPLICACAO": {},
             "DIVISAO": {},
             "IGUAL": {"=": "IGUAL_IGUAL"},  # '=' seguido de '=
@@ -1669,7 +1797,6 @@ class Lexico:
             "IF": "IF",
             "FOR": "FOR",
             "WHILE": "WHILE",
-            "IN": "IN",
             "OUT": "OUT",
             # Literais e identificadores
             "CONSTANTE": "CONSTANTE",
@@ -1684,6 +1811,7 @@ class Lexico:
             "PONTO_VIRGULA": "PONTO_VIRGULA",
             "DOIS_PONTOS": "DOIS_PONTOS",
             "CONCATENAR": "CONCATENAR",
+            "PONTO_ACESSO": "PONTO_ACESSO",
             # Operadores
             "MAIOR": "MAIOR",
             "MENOR": "MENOR",
@@ -1696,6 +1824,8 @@ class Lexico:
             "SUBTRACAO": "SUBTRACAO",
             "MULTIPLICACAO": "MULTIPLICACAO",
             "DIVISAO": "DIVISAO",
+            "INCREMENTO": "INCREMENTO",
+            "DECREMENTO": "DECREMENTO",
             # Função
             "FUN": "FUN",
             # Estados intermediários que também são finais
